@@ -1,10 +1,7 @@
 import ProductDetails from "./routes/ProductDetails";
-import Catalog from "./routes/Catalog";
 
-function App() {
+export default function App() {
  return (
-    <Catalog />
+    <ProductDetails />
  );
 }
-
-export default App
