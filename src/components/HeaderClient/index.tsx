@@ -7,7 +7,6 @@ export default function HeaderClient() {
     <header className="dsc-header-client">
       <nav className="dsc-container">
         <Link to={"/"}>
-          {" "}
           <h1>DSCommerce</h1>
         </Link>
         <div className="dsc-navbar-right">
