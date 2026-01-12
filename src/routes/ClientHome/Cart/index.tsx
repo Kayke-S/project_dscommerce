@@ -4,12 +4,9 @@ import * as cartService from "../../../services/cart-service";
 import { OrderDTO } from "../../../models/order";
 
 export default function Cart() {
+  const [cart] = useState<OrderDTO>(cartService.getCart());
 
-  const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
-
-
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <main>

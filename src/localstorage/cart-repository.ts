@@ -1,13 +1,14 @@
 import { OrderDTO } from "../models/order";
+import { CART_KEY } from "../utils/system";
 
 export function save(cart: OrderDTO) {
   const str = JSON.stringify(cart);
-  localStorage.setItem("com.kaykesilva.dscommerce/Cart", str);
+  localStorage.setItem(CART_KEY, str);
 }
 
 export function get(): OrderDTO {
   const obj = JSON.parse(
-    localStorage.getItem("com.kaykesilva.dscommerce/Cart") || '{"items"=[]}'
+    localStorage.getItem(CART_KEY) || '{"items":[]}'
   );
 
   return obj;
