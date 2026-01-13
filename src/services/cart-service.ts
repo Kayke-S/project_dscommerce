@@ -50,9 +50,10 @@ export function decreaseItem(productId: number) {
   });
 
   if (item) {
-    if (item.quantity > 1) {
-      item.quantity -= 1;
-      cartRepository.save(cart);
+    item.quantity -= 1;
+    if (item.quantity < 1) {
+      cart.items = cart.items.filter(item => item.productId !== productId);
     }
+    cartRepository.save(cart);
   }
 }
