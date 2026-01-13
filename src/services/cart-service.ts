@@ -19,5 +19,8 @@ export function addProduct(product: ProductDTO) {
     cart.items.push(newItem);
     cartRepository.save(cart);
   }
+}
 
+export function clearCart() {
+  cartRepository.clear();
 }
