@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
 import * as cartService from "../../../services/cart-service";
-import { OrderDTO } from "../../../models/order";
+import { OrderDTO, OrderItemDTO } from "../../../models/order";
 import { Link } from "react-router-dom";
 
 export default function Cart() {
@@ -11,6 +11,18 @@ export default function Cart() {
 
   function handleClearClick() {
     cartService.clearCart();
+
+    setCart(cartService.getCart());
+  }
+
+  function handleIncreaseClick(item: OrderItemDTO) {
+    cartService.incraseItem(item.productId);
+
+    setCart(cartService.getCart());
+  }
+
+  function handleDecreaseClick(item: OrderItemDTO) {
+    cartService.decreaseItem(item.productId);
 
     setCart(cartService.getCart());
   }
@@ -36,9 +48,23 @@ export default function Cart() {
                   <div className="dsc-cart-item-description">
                     <h3>{item.name}</h3>
                     <div className="dsc-cart-item-quantity-container">
-                      <div className="dsc-cart-item-quantity-btn">-</div>
+                      <div
+                        onClick={() => {
+                          handleDecreaseClick(item);
+                        }}
+                        className="dsc-cart-item-quantity-btn"
+                      >
+                        -
+                      </div>
                       <p>{item.quantity}</p>
-                      <div className="dsc-cart-item-quantity-btn">+</div>
+                      <div
+                        onClick={() => {
+                          handleIncreaseClick(item);
+                        }}
+                        className="dsc-cart-item-quantity-btn"
+                      >
+                        +
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -59,7 +85,9 @@ export default function Cart() {
           <Link to="/catalog">
             <div className="dsc-btn dsc-btn-white">Continuar comprando</div>
           </Link>
-          <div onClick={handleClearClick} className="dsc-btn dsc-btn-white">Limpar carrinho</div>
+          <div onClick={handleClearClick} className="dsc-btn dsc-btn-white">
+            Limpar carrinho
+          </div>
         </div>
       </section>
     </main>
