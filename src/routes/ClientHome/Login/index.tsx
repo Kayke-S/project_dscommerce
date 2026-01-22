@@ -1,5 +1,5 @@
 import "./styles.css";
-import { loginRequest } from "../../../services/auth-service";
+import * as authService from "../../../services/auth-service";
 import { useState } from "react";
 import type { CredentialsDTO } from "../../../models/auth";
 
@@ -11,7 +11,13 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    loginRequest(formData);
+    authService.loginRequest(formData).then((response) => {
+      console.log(response.data);
+    }).catch(
+      error => {
+        console.log("ERRO NO LOGIN", error);
+      }
+    );
   }
 
   function handleInputChange(event: any) {
