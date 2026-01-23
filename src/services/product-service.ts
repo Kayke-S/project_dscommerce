@@ -1,5 +1,4 @@
-import axios, { type AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../utils/system";
+import { type AxiosRequestConfig } from "axios";
 import { requestBackend } from "../utils/requests";
 
 export function findPageRequest(
