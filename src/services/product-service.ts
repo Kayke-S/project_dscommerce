@@ -22,5 +22,5 @@ export function findPageRequest(
 }
 
 export function findById(id: number) {
-  return requestBackend({ url: `${BASE_URL}/products/${id}` });
+  return requestBackend({ url: `/products/${id}` });
 }
