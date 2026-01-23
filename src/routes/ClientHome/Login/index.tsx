@@ -12,7 +12,8 @@ export default function Login() {
   function handleSubmit(event: any) {
     event.preventDefault();
     authService.loginRequest(formData).then((response) => {
-      console.log(response.data);
+      const token = response.data.access_token;
+      authService.saveAccessToken(token);
     }).catch(
       error => {
         console.log("ERRO NO LOGIN", error);
