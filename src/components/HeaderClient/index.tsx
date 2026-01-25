@@ -5,6 +5,7 @@ import * as authService from "../../services/auth-service";
 import ImgAdmin from "../../assets/admin.svg";
 import { useContext } from "react";
 import { ContextToken } from "../../utils/context-token";
+import LoggedUser from "../LoggedUser";
 
 export default function HeaderClient() {
   const { contextTokenPayload } = useContext(ContextToken);
@@ -28,7 +29,7 @@ export default function HeaderClient() {
                 <CartIcon />
               </div>
             </Link>
-            <Link to={"/login"}>Entrar</Link>
+            <LoggedUser />
           </div>
         </div>
       </nav>

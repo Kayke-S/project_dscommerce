@@ -1,8 +1,7 @@
 import "./styles.css";
 import ImgHome from "../../assets/home.svg";
 import ImgProduct from "../../assets/product.svg";
-
-
+import LoggedUser from "../LoggedUser";
 
 export default function HeaderAdmin() {
   return (
@@ -20,10 +19,7 @@ export default function HeaderAdmin() {
               <p className="dsc-menu-item-active">Produtos</p>
             </div>
           </div>
-          <div className="dsc-logged-user">
-            <p>Maria Silva</p>
-            <a href="#">Sair</a>
-          </div>
+          <LoggedUser />
         </div>
       </nav>
     </header>
