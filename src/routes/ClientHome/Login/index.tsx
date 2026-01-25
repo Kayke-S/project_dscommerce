@@ -1,9 +1,15 @@
 import "./styles.css";
 import * as authService from "../../../services/auth-service";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import type { CredentialsDTO } from "../../../models/auth";
+import { useNavigate } from "react-router-dom";
+import { ContextToken } from "../../../utils/context-token";
 
 export default function Login() {
+  const { setContextTokenPayload } = useContext(ContextToken);
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<CredentialsDTO>({
     username: "",
     password: "",
@@ -11,15 +17,19 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    authService.loginRequest(formData).then((response) => {
-      const token = response.data.access_token;
-      authService.saveAccessToken(token);
-      console.log(authService.getAccessTokenPayload());
-    }).catch(
-      error => {
+    authService
+      .loginRequest(formData)
+      .then((response) => {
+        const token = response.data.access_token;
+        authService.saveAccessToken(token);
+
+        setContextTokenPayload(authService.getAccessTokenPayload());
+
+        navigate("/cart");
+      })
+      .catch((error) => {
         console.log("ERRO NO LOGIN", error);
-      }
-    );
+      });
   }
 
   function handleInputChange(event: any) {
