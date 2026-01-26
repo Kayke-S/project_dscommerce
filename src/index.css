@@ -415,3 +415,7 @@ tfoot        { display: table-footer-group; }
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 }
+
+.dsc-dialog-btn {
+  width: 100%;
+}

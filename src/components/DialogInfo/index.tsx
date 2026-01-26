@@ -10,7 +10,7 @@ export function DialogInfo({ message, onDialogClose }: Props) {
     <div className="dsc-dialog-background" onClick={() => onDialogClose()}>
       <div className="dsc-dialog-box" onClick={(e) => e.stopPropagation()}> 
         <h2>{message}</h2>
-        <div onClick={() => onDialogClose()} className="dsc-dialog-btn-container">
+        <div onClick={() => onDialogClose()} className="dsc-dialog-btn">
           <ButtonPrimary text="Ok" />
         </div>
       </div>
