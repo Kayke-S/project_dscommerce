@@ -14,6 +14,11 @@ type QueryParams = {
 };
 
 export default function ProductListing() {
+  const [dialogInfoData, setDialogInfoData] = useState({
+    visible: true,
+    message: "Operação Sucedida",
+  });
+
   const [queryParams, setQueryParams] = useState<QueryParams>({
     page: 0,
     name: "",
@@ -43,6 +48,14 @@ export default function ProductListing() {
         }
       });
   }, [queryParams]);
+
+  function handleDialogInfoCloseClick() {
+    setDialogInfoData({ ...dialogInfoData, visible: false });
+  }
+
+  function handleDeleteClick() {
+    setDialogInfoData({ ...dialogInfoData, visible: true });
+  }
 
   return (
     <main>
@@ -88,6 +101,7 @@ export default function ProductListing() {
                 </td>
                 <td>
                   <img
+                    onClick={handleDeleteClick}
                     className="dsc-product-listing-btn"
                     src={ImgDelete}
                     alt="Deletar"
@@ -100,7 +114,12 @@ export default function ProductListing() {
         {!isLastPage && <ButtonNextPage onNextPage={handleNextPageClick} />}
       </section>
 
-      <DialogInfo />
+      {dialogInfoData.visible && (
+        <DialogInfo
+          message={dialogInfoData.message}
+          onDialogClose={handleDialogInfoCloseClick}
+        />
+      )}
     </main>
   );
 }
