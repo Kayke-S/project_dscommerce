@@ -272,6 +272,12 @@ nav a {
   display: none;
 }
 
+.dsc-text-area {
+  resize: none;
+  height: 100px;
+  padding-top: 10px;
+}
+
 .dsc-form-control[data-dirty="true"][data-invalid="true"] ~ div {
   display: unset;
 }
