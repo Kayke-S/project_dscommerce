@@ -17,6 +17,10 @@ export default function ProductForm() {
       name: "name",
       type: "text",
       placeholder: "Nome",
+      validation: (value: string) => {
+        return /^.{3,80}$/.test(value);
+      },
+      message: "Favor, Informar um nome de 3 a 80 caracteres"
     },
     price: {
       value: "",
@@ -61,7 +65,6 @@ export default function ProductForm() {
     const newFormData = forms.dirtyAndValidate(formData, name);
     setFormData(newFormData);
   }
-
 
   return (
     <main>
