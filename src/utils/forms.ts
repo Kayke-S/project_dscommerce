@@ -39,16 +39,61 @@ export function toDirty(inputs: any, name: string) {
   return { ...inputs, [name]: { ...inputs[name], dirty: "true" } };
 }
 
-export function updateAndValidate(inputs: any, name:string, newValue: any){
+export function updateAndValidate(inputs: any, name: string, newValue: any) {
   const dataUpdated = update(inputs, name, newValue);
   const dataValidated = validate(dataUpdated, name);
 
   return dataValidated;
 }
 
-export function dirtyAndValidate(inputs: any, name:string){
+export function dirtyAndValidate(inputs: any, name: string) {
   const dataDirty = toDirty(inputs, name);
   const dataValidated = validate(dataDirty, name);
 
   return dataValidated;
+}
+
+export function toDirtyAll(inputs: any) {
+  const newInputs: any = {};
+
+  for (var name in inputs) {
+    newInputs[name] = { ...inputs[name], dirty: "true" };
+  }
+
+  return newInputs;
+}
+
+export function validateAll(inputs: any) {
+  const newInputs: any = {};
+
+  for (var name in inputs) {
+    if (inputs[name].validation) {
+      const isValid: boolean = inputs[name].validation(inputs[name].value);
+      newInputs[name] = {
+        ...inputs[name],
+        invalid: isValid ? "false" : "true",
+      };
+    } else {
+      newInputs[name] = { ...inputs[name] };
+    }
+  }
+
+  return newInputs;
+}
+
+export function dirtyAndValidateAll(inputs: any) {
+  const dirtyInputs: any = toDirtyAll(inputs);
+  const validateInputs: any = validateAll(dirtyInputs);
+
+  return validateInputs;
+}
+
+export function hasAnyInvalid(inputs: any) {
+  for (var name in inputs) {
+    if (inputs[name].invalid == "true" && inputs[name].dirty == "true") {
+      return true;
+    }
+  }
+
+  return false;
 }

@@ -17,7 +17,6 @@ type QueryParams = {
 };
 
 export default function ProductListing() {
-
   const navigate = useNavigate();
 
   const [dialogInfoData, setDialogInfoData] = useState({
@@ -62,11 +61,15 @@ export default function ProductListing() {
   }, [queryParams]);
 
   function handleNewProductClick() {
-    navigate("/admin/products/create")
+    navigate("/admin/products/create");
   }
 
   function handleDialogInfoCloseClick() {
     setDialogInfoData({ ...dialogInfoData, visible: false });
+  }
+
+  function handleEditClick(productId: number) {
+    navigate(`/admin/products/${productId}`);
   }
 
   function handleDeleteClick(productId: number) {
@@ -135,6 +138,7 @@ export default function ProductListing() {
                 <td className="dsc-txt-left">{p.name}</td>
                 <td>
                   <img
+                    onClick={() => handleEditClick(p.id)}
                     className="dsc-product-listing-btn"
                     src={ImgEdit}
                     alt="Editar"
