@@ -66,7 +66,6 @@ export function isAuthenticated(): boolean {
 
 export function hasAnyRoles(roles: RoleEnum[]): boolean {
 
-  //! isso significa que a tela pode ser acessada publicamente.
   if(roles.length === 0) {
     return true;
   }
