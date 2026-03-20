@@ -16,7 +16,8 @@ export function loginRequest(loginData: CredentialsDTO) {
     Authorization: "Basic " + window.btoa(CLIENT_ID + ":" + CLIENT_SECRET),
   };
 
-  const requestBody = QueryString.stringify({
+  //converte pra username=kayke&password=123&grant_type=password
+  const requestBody = QueryString.stringify({ 
     ...loginData,
     grant_type: "password",
   });
